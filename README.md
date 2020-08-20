@@ -34,7 +34,7 @@ Blogger is an app where Users can write a Blog about anything they would like to
 
 ---
 
-To use Bloger click the following link:
+To use Blogger click the following link:
 
 
 
