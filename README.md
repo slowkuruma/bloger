@@ -11,7 +11,7 @@ Blogger is an app where Users can write a Blog about anything they would like to
 ---
 
 
-[Imgur](https://i.imgur.com/i1wzKQb.png)
+![ERD](https://i.imgur.com/i1wzKQb.png)
 
 
 
