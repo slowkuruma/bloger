@@ -1,23 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const db = mongoose.connection;
 
-const connectionString = 'mongodb://localhost/test';
-
-
-mongoose.connect(connectionString, {
+mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
 });
 
-
-mongoose.connection.on('connected', () => {
-    console.log(`Mongoose connected to ${connectionString}`);
-});
-
-mongoose.connection.on('error', (err) => {
-    console.log(`Mongoose connected error ${err}`);
-});
-
-mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose disconnected');
+db.on("connected", () => {
+    console.log(`Connected to MongoDB at ${db.host}:${db.port}`);
 });
