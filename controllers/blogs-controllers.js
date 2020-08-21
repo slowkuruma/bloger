@@ -145,3 +145,25 @@ const updateBlog = async (req, res, next) => {
 };
 
 //delete route
+const deleteBlog = async (req, res, next) => {
+    const blogId = reg.params.bid;
+
+    let blog;
+
+    try {
+        blog = await (await Blog.findById(blogId)).populate("creator");
+    } catch (err) {
+        const error = new HttpError(
+            "Something went wrong, could not delete blog",
+            500
+        );
+        return next(error);
+    }
+    if (!blog) {
+        const error = new HttpError("Could not find blog for this id", 404);
+        return next(error);
+    }
+
+
+
+}
