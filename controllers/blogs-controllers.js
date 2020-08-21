@@ -172,6 +172,28 @@ const deleteBlog = async (req, res, next) => {
         return next(error);
     }
 
+    try {
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await blog.remove({ session; sess });
+        blog.creator.blogs.pull(blog);
+        await blog.creator.save({ session: sess });
+        await sess.commitTransaction();
+    } catch (err) {
+        const error = new HttpError(
+            "Something went wrong, could not delete blog",
+            500
+        );
+        return next(error);
+    }
 
+    res.status(200).json({ message: "Deleted place" });
 
-}
+};
+
+exports.getBlogById = getBlogById;
+exports.getBlogsByUserId = getBlogsByUserId;
+exports.createBlog = createBlog;
+exports.updateBlog = updateBlog;
+exports.deleteBlog = deleteBlog;
+
