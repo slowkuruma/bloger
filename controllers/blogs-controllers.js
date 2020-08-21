@@ -102,4 +102,46 @@ const createBlog = asnyc(req, res, next) => {
 
 
 //update route
+const updateBlog = async (req, res, next) => {
+    const errors = validationResult(reg);
+    if (!errors.isEmpty()) {
+        return next(new HttpError("Invalid input passed", 422));
+    }
 
+    const { title, description } = reg.body;
+    const blogId = reg.params.bid;
+
+    let blog;
+
+    try {
+        blog = await Blog.findById(blogId);
+    } catch (err) {
+        const error = new HttpError(
+            "Somethig went wrong, could not update blog",
+            500
+        );
+        return next(error);
+    }
+
+    if (blog.creator.toString() !== req.userData.userId) {
+        const error = new HttpError("You are not allowed to edit this blog", 401);
+        return next(error);
+    }
+
+    blog.title = title;
+    blog.description = description;
+
+    try {
+        await blog.save();
+    } catch (err) {
+        const error = new HttpError(
+            "Something went wrong, could not update blog",
+            500
+        );
+        return next(error);
+    }
+
+    res.status(200).json({ blog: blog.toObject({ getters: true }) });
+};
+
+//delete route
