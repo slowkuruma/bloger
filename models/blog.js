@@ -8,4 +8,4 @@ const blogSchema = new Schema({
     creator: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
 });
 
-module.exports = mongoose.model("Twott", blogSchema);
+module.exports = mongoose.model("Blog", blogSchema);
