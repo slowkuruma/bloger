@@ -164,6 +164,14 @@ const deleteBlog = async (req, res, next) => {
         return next(error);
     }
 
+    if (blog.creator.id !== reg.userData.userId) {
+        const error = new HttpError(
+            "You are not allowed to delete this blog",
+            401
+        );
+        return next(error);
+    }
+
 
 
 }
