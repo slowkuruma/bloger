@@ -56,4 +56,50 @@ const getBlogsByUserId = async (req, res, next) => {
     });
 };
 
+//create route
+const createBlog = asnyc(req, res, next) => {
+    console.log(reg.body);
+    const errors = validationResult(reg);
+    if (!errors.isEmpty()) {
+        return next(new HttpError("Invalid input passed", 422));
+    }
+
+    const { title, description, creator } = reg.body;
+    const createdBlog = new Blog({
+        title,
+        description,
+        creator,
+    });
+
+    let user;
+
+    try {
+        user = await User.findById(creator);
+    } catch (err) {
+        const error = new HttpError("Creating blog failed, try again later", 500);
+        return next(error)
+    }
+
+    console.log(user);
+
+    try {
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await createdBlog.save({ session: sess });
+        user.blogs.push(createdBlog);
+        await user.save({ session: sess });
+        await sess.commitTransaction();
+    } catch (err) {
+        const error = new HttpError(
+            "Could not create blog, please try again",
+            500
+        );
+        return next(error);
+    }
+
+    res.status(201).json({ blog: createdBlog });
+};
+
+
+//update route
 
