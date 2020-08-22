@@ -35,15 +35,22 @@ app.use((req, res, next) => {
 app.use("api/blogs", blogsRoutes);
 app.use("api/users", usersRoutes);
 
+app.use((req, res, next) => {
+    const error = new HttpError("Could not find this route", 404);
+    throw error;
+});
 
+app.use((error, req, res, next) => {
+    if (res.headerSent) {
+        return next(error);
+    }
+    res.status(error.code || 500);
+    res.json({ message: error.message || "An unknown error has occured" });
+});
 
-
-
-
-
-
-
-
+app.get("/*", function (req, res) {
+    res.sendFile(path.join(_dirname, "build", "index.html"));
+});
 
 
 const port = process.env.PORT || 3001
@@ -51,3 +58,10 @@ const port = process.env.PORT || 3001
 app.listen(port, function () {
     console.log(`Express Train... CHOO!!! CHOO!!! ${port}`)
 })
+
+
+
+
+
+
+
