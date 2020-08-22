@@ -1,4 +1,4 @@
-const HttpError = require("../models/hjttp-error")
+const HttpError = require("../models/http-error")
 const { validationResult } = require("express-validator")
 const Blog = require("../models/blog")
 const User = require("../models/user")
