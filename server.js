@@ -32,10 +32,12 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
 app.use("api/blogs", blogsRoutes);
 app.use("api/users", usersRoutes);
+
+
+
+
 
 
 
