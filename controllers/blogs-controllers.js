@@ -57,7 +57,7 @@ const getBlogsByUserId = async (req, res, next) => {
 };
 
 //create route
-const createBlog = asnyc(req, res, next) => {
+const createBlog = async (req, res, next) => {
 
     console.log(reg.body);
 
