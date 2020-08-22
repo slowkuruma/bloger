@@ -58,7 +58,9 @@ const getBlogsByUserId = async (req, res, next) => {
 
 //create route
 const createBlog = asnyc(req, res, next) => {
+
     console.log(reg.body);
+
     const errors = validationResult(reg);
     if (!errors.isEmpty()) {
         return next(new HttpError("Invalid input passed", 422));
@@ -175,7 +177,7 @@ const deleteBlog = async (req, res, next) => {
     try {
         const sess = await mongoose.startSession();
         sess.startTransaction();
-        await blog.remove({ session; sess });
+        await blog.remove({ session: sess });
         blog.creator.blogs.pull(blog);
         await blog.creator.save({ session: sess });
         await sess.commitTransaction();
