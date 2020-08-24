@@ -2,17 +2,15 @@ import React, { useState, useCallback, UseEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
   Switch,
 } from "react-router-dom";
 import Users from "./user/pages/Users";
 import NewBlog from "./blogs/pages/NewBlog";
 import UserBlogs from "./blogs/pages/UserBlogs";
 import UpdateBlog from "./blogs/pages/UpdateBlog";
+
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
-import Auth from "./user/pages/Auth";
 import { AuthContext } from "./shared/context/auth-context";
-import { login } from "../controllers/users-contollers";
 
 const App = () => {
   const [token, setToken] = useState(false);
