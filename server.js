@@ -1,16 +1,14 @@
 const express = require("express");
 const path = require("path");
-const cors = require("cors");
 const logger = require("morgan");
 const favicon = require("serve-favicon");
+const bodyParser = require("body-parser");
 
 const blogsRoutes = require("./routes/blogs-routes");
 const usersRoutes = require("./routes/users-routes");
 const HttpError = require("./models/http-error");
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(methodOverride('_method'));
 
 require("dotenv").config();
 require("./config/database");
@@ -20,6 +18,8 @@ app.use(express.json());
 
 app.use(favicon(path.join(_dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(_dirname, "build")));
+
+app.use(bodyParser.json());
 
 
 app.use((req, res, next) => {
@@ -53,11 +53,11 @@ app.get("/*", function (req, res) {
 });
 
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3001;
 
 app.listen(port, function () {
-    console.log(`Express Train... CHOO!!! CHOO!!! ${port}`)
-})
+    console.log(`Express Train... CHOO!!! CHOO!!! ${port}`);
+});
 
 
 

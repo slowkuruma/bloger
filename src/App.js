@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
 } from "react-router-dom";
 import Users from "./user/pages/Users";
 import NewBlog from "./blogs/pages/NewBlog";
@@ -11,6 +12,7 @@ import UpdateBlog from "./blogs/pages/UpdateBlog";
 
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { AuthContext } from "./shared/context/auth-context";
+
 
 const App = () => {
   const [token, setToken] = useState(false);
@@ -62,9 +64,9 @@ const App = () => {
           <Users />
         </Route>
 
-        <Ruote path="/:userId/blogs" exact>
+        <Route path="/:userId/blogs" exact>
           <UserBlogs />
-        </Ruote>
+        </Route>
 
         <Route path="/blogs/new" exact>
           <NewBlog />

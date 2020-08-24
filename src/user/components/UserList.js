@@ -22,7 +22,7 @@ const UsersList = (props) => {
                     id={user.id}
                     image={user.image}
                     name={user.name}
-                    twottsCount={user.blogs.length}
+                    blogsCount={user.blogs.length}
                 />
             ))}
         </ul>

@@ -32,7 +32,7 @@ const BlogItem = (props) => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
             <Modal
                 show={showConfirmModal}
@@ -72,7 +72,7 @@ const BlogItem = (props) => {
                     </div>
                 </Card>
             </li>
-        </>
+        </React.Fragment>
     );
 };
 
