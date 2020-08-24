@@ -123,7 +123,7 @@ const Auth = () => {
                         id="password"
                         type="password"
                         label="Password"
-                        validators={[VALIDATOR_MINLENGTH(8)]}
+                        validators={[VALIDATOR_MINLENGTH(4)]}
                         errorText="Please enter a valid password. Min: 8 characters"
                         onInput={inputHandler}
                     />

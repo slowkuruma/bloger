@@ -16,7 +16,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 
 const UpdateBlog = (props) => {
     const auth = useContext(AuthContext);
-    const { isLoading, erro, sendRequest, clearError } = useHttpClient();
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedBlog, setLoadedBlog] = useState();
     const blogId = useParams().blogId;
     const history = useHistory();

@@ -1,18 +1,18 @@
-import React, { useState, useCallback, UseEffect } from "react";
+import React, { useState, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
+
 import Users from "./user/pages/Users";
 import NewBlog from "./blogs/pages/NewBlog";
 import UserBlogs from "./blogs/pages/UserBlogs";
 import UpdateBlog from "./blogs/pages/UpdateBlog";
-
+import Auth from "./user/pages/Auth";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import { AuthContext } from "./shared/context/auth-context";
-
 
 const App = () => {
   const [token, setToken] = useState(false);
