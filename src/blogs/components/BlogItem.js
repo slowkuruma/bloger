@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "React";
+import React, { useState, useContext } from "react";
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
-import Modal from "../../shared/componnents/UIElements/Modal";
+import Modal from "../../shared/components/UIElements/Modal";
 import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -21,10 +21,10 @@ const BlogItem = (props) => {
         setShowConfirmModal(false);
     };
 
-    const confirmDeleteHandler = async => {
+    const confirmDeleteHandler = () => {
         setShowConfirmModal(false);
         try {
-            await sendRequest(`/api/blogs/${props.id}`, "DELETE", null, {
+            sendRequest(`/api/blogs/${props.id}`, "DELETE", null, {
                 Authorization: "Bearer " + auth.token,
             });
             props.onDelete(props.id);
@@ -41,10 +41,10 @@ const BlogItem = (props) => {
                 footerClass="place-item_modal-actions"
                 footer={
                     <>
-                        <Button inverse OnClick={cancalDeleteHandler}>
+                        <Button inverse OnClick={cancelDeleteHandler}>
                             CANCEL
         </Button>
-                        <Button danger OnClick={confirumDeleteHandler}>
+                        <Button danger OnClick={confirmDeleteHandler}>
                             DELETE
         </Button>
                     </>

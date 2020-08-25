@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-route-dom";
-import BlogList from "../components/BlogList"
+import { useParams } from "react-router-dom";
+import BlogList from "../components/BlogList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -36,7 +36,7 @@ const UserBlogs = () => {
                 </div>
             )}
             {!isLoading && loadedBlogs && (
-                <BlogList items={loadedBlogs} onDeleteBlogs={blogDeleteHandler} />
+                <BlogList items={loadedBlogs} onDeleteBlog={blogDeleteHandler} />
             )}
         </>
     );

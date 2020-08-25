@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Input from "../../shared/components/FormElements/Input"
+import Input from "../../shared/components/FormElements/Input";
 import {
     VALIDATOR_REQUIRE,
     VALIDATOR_MINLENGTH,
@@ -32,7 +32,7 @@ const NewBlog = () => {
     const history = useHistory();
 
     const blogSubmitHandler = async (event) => {
-        event.preventDeafult();
+        event.preventDefault();
         try {
             await sendRequest(
                 `/api/blogs`,

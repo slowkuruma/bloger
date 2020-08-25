@@ -1,5 +1,5 @@
 import React from "react";
-import "./UsersList.css";
+import "./UserList.css";
 import UserItem from "./UserItem";
 import Card from "../../shared/components/UIElements/Card";
 

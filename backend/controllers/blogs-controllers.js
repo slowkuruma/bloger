@@ -85,7 +85,7 @@ const createBlog = async (req, res, next) => {
     }
 
     console.log(user);
-
+    //has to pass all checks to create
     try {
         const sess = await mongoose.startSession();
         sess.startTransaction();
@@ -170,7 +170,7 @@ const deleteBlog = async (req, res, next) => {
         );
         return next(error);
     }
-
+    //has to pass all checks to delete
     try {
         const sess = await mongoose.startSession();
         sess.startTransaction();

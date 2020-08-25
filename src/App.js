@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
   Redirect,
+  Switch,
 } from "react-router-dom";
 
 import Users from "./user/pages/Users";
@@ -56,30 +56,32 @@ const App = () => {
 
   let routes;
 
-  if (token) {
-    routes = (
-      <Swtich>
 
-        <Route path="/" exact>
-          <Users />
-        </Route>
+  routes = (
+    <Switch>
 
-        <Route path="/:userId/blogs" exact>
-          <UserBlogs />
-        </Route>
+      <Route path="/" exact>
+        <Users />
+      </Route>
 
-        <Route path="/blogs/new" exact>
-          <NewBlog />
-        </Route>
+      <Route path="/:userId/blogs" exact>
+        <UserBlogs />
+      </Route>
 
-        <Route path="/blogs/:blogid">
-          <UpdateBlog />
-        </Route>
+      <Route path="/blogs/new" exact>
+        <NewBlog />
+      </Route>
 
-        <Redirect to="/" />
-      </Swtich>
-    );
-  }
+      <Route path="/blogs/:blogid">
+        <UpdateBlog />
+      </Route>
+      <Route path="/auth">
+        <Auth />
+      </Route>
+      <Redirect to="/" />
+    </Switch>
+  );
+
 
   return (
     <AuthContext.Provider

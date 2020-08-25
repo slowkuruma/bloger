@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../../shared/components/UIElements/Card";
 import BlogItem from "./BlogItem";
 import Button from "../../shared/components/FormElements/Button";
-import "./Bloglist.css";
+import "./BlogList.css";
 
 const BlogList = (props) => {
     if (props.items.length === 0) {
