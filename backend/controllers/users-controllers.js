@@ -19,7 +19,8 @@ const getUsers = async (req, res, next) => {
 const signup = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return next(new HttpError("Invalid input, please check your data", 422));
+        return next(
+            new HttpError("Invalid input, please check your data", 422));
     }
     const { name, email, password } = req.body;
 
@@ -51,9 +52,9 @@ const signup = async (req, res, next) => {
         name,
         email,
         image:
-            "https://www.creativefreedom.co.uk/wp-content/uploads/2017/06/Twitter-featured.png",
+            "https://i.imgur.com/djfiyTm.png",
         password: hashedPassword,
-        twotts: [],
+        blogs: [],
     });
 
     try {

@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 
 const getBlogById = async (req, res, next) => {
     const blogId = req.params.bid;
-    let blog;
 
+    let blog;
     try {
         blog = await Blog.findById(blogId);
     } catch (err) {
@@ -84,18 +84,16 @@ const createBlog = async (req, res, next) => {
         return next(error);
     }
 
-    console.log(user);
-    //has to pass all checks to create
+
     try {
-        const sess = await mongoose.startSession();
-        sess.startTransaction();
-        await createdBlog.save({ session: sess });
+        await createdBlog.save();
+        console.log("createdBlog", createdBlog);
         user.blogs.push(createdBlog);
-        await user.save({ session: sess });
-        await sess.commitTransaction();
+        await user.save();
+
     } catch (err) {
         const error = new HttpError(
-            "Could not create blog failed, please try again.",
+            "Could not create blog, please try again.",
             500
         );
         return next(error);

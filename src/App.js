@@ -24,7 +24,7 @@ const App = () => {
     const tokenExpirationDate =
       expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     localStorage.setItem(
-      "userdata",
+      "userData",
       JSON.stringify({
         userId: uid,
         token: token,
@@ -33,13 +33,12 @@ const App = () => {
     );
   }, []);
 
-
-
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
     localStorage.removeItem("userData");
   }, []);
+
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
@@ -54,34 +53,44 @@ const App = () => {
     }
   }, [login]);
 
+
+
   let routes;
 
-
-  routes = (
-    <Switch>
-
-      <Route path="/" exact>
-        <Users />
-      </Route>
-
-      <Route path="/:userId/blogs" exact>
-        <UserBlogs />
-      </Route>
-
-      <Route path="/blogs/new" exact>
-        <NewBlog />
-      </Route>
-
-      <Route path="/blogs/:blogid">
-        <UpdateBlog />
-      </Route>
-      <Route path="/auth">
-        <Auth />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
-  );
-
+  if (token) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/blogs" exact>
+          <UserBlogs />
+        </Route>
+        <Route path="/blogs/new" exact>
+          <NewBlog />
+        </Route>
+        <Route path="/blogs/:blogId">
+          <UpdateBlog />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/blogs" exact>
+          <UserBlogs />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Redirect to="/auth" />
+      </Switch>
+    );
+  }
 
   return (
     <AuthContext.Provider
@@ -101,4 +110,4 @@ const App = () => {
   );
 };
 
-
+export default App;

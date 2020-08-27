@@ -11,6 +11,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from "../../shared/hooks/http-hook"
 import Button from "../../shared/components/FormElements/Button";
+import "./BlogForm.css";
 
 const NewBlog = () => {
     const auth = useContext(AuthContext);
@@ -35,7 +36,7 @@ const NewBlog = () => {
         event.preventDefault();
         try {
             await sendRequest(
-                `/api/blogs`,
+                `http://localhost:3001/api/blogs`,
                 "POST",
                 JSON.stringify({
                     title: formState.inputs.title.value,
@@ -50,27 +51,25 @@ const NewBlog = () => {
             history.push("/");
         } catch (err) { }
     };
-
     return (
         <>
             <ErrorModal error={error} onClear={clearError} />
             <form className="blog-form" onSubmit={blogSubmitHandler}>
                 {isLoading && <LoadingSpinner asOverlay />}
-                <input
+                <Input
                     id="title"
                     element="input"
                     type="text"
                     label="Title"
-                    validator={[VALIDATOR_REQUIRE()]}
+                    validators={[VALIDATOR_REQUIRE()]}
                     errorText="Please enter a valid title"
                     onInput={inputHandler}
                 />
-                <input
+                <Input
                     id="description"
                     element="textarea"
-                    type="description"
                     label="Description"
-                    validator={[VALIDATOR_MINLENGTH(1)]}
+                    validators={[VALIDATOR_MINLENGTH(1)]}
                     errorText="Please enter a description"
                     onInput={inputHandler}
                 />

@@ -24,7 +24,7 @@ const BlogItem = (props) => {
     const confirmDeleteHandler = () => {
         setShowConfirmModal(false);
         try {
-            sendRequest(`/api/blogs/${props.id}`, "DELETE", null, {
+            sendRequest(`http://localhost:3001/api/blogs/${props.id}`, "DELETE", null, {
                 Authorization: "Bearer " + auth.token,
             });
             props.onDelete(props.id);

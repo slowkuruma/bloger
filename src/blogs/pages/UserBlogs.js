@@ -14,7 +14,7 @@ const UserBlogs = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const responseData = await sendRequest(`/api/blogs/user/${userId}`);
+                const responseData = await sendRequest(`http://localhost:3001/api/blogs/user/${userId}`);
                 setLoadedBlogs(responseData.blogs);
             } catch (err) { }
         };
@@ -35,9 +35,9 @@ const UserBlogs = () => {
                     <LoadingSpinner />
                 </div>
             )}
-            {!isLoading && loadedBlogs && (
+            {!isLoading && loadedBlogs &&
                 <BlogList items={loadedBlogs} onDeleteBlog={blogDeleteHandler} />
-            )}
+            }
         </>
     );
 };

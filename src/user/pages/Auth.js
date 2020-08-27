@@ -50,15 +50,16 @@ const Auth = () => {
                 false
             );
         }
-        setIsLoginMode((prevMode) => !prevMode);
+        setIsLoginMode(prevMode => !prevMode);
     };
 
     const authSubmitHandler = async (event) => {
         event.preventDefault();
+        console.log("log me in");
         if (isLoginMode) {
             try {
                 const responseData = await sendRequest(
-                    `/api/users/login`,
+                    `http:/localhost:3001/api/users/login`,
                     "POST",
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -73,7 +74,7 @@ const Auth = () => {
         } else {
             try {
                 const responseData = await sendRequest(
-                    `/api/users/signup`,
+                    `http://localhost:3001/api/users/signup`,
                     "POST",
                     JSON.stringify({
                         name: formState.inputs.name.value,
@@ -89,6 +90,7 @@ const Auth = () => {
             } catch (err) { }
         }
     };
+
 
     return (
         <>
@@ -132,7 +134,7 @@ const Auth = () => {
                     </Button>
                 </form>
                 <Button inverse onClick={switchModeHandler}>
-                    SWITCH TO {isLoginMode ? "SIGNUP" : "LOGIN"}
+                    {isLoginMode ? "SIGNUP" : "LOGIN"}
                 </Button>
             </Card>
         </>

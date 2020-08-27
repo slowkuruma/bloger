@@ -38,7 +38,7 @@ const UpdateBlog = (props) => {
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const responseData = await sendRequest(`/api/blogs/${blogId}`);
+                const responseData = await sendRequest(`http://localhost:3001/api/blogs/${blogId}`);
                 setLoadedBlog(responseData.blog);
                 setFormData(
                     {
@@ -62,7 +62,7 @@ const UpdateBlog = (props) => {
         event.preventDefault();
         try {
             await sendRequest(
-                `/api/blogs/${blogId}`,
+                `http://localhost:3001/api/blogs/${blogId}`,
                 "PUT",
                 JSON.stringify({
                     title: formState.inputs.title.value,
