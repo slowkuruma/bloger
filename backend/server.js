@@ -3,7 +3,6 @@ const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 
 const blogsRoutes = require("./routes/blogs-routes");
 const usersRoutes = require("./routes/users-routes");
@@ -11,14 +10,13 @@ const HttpError = require("./models/http-error");
 
 const app = express();
 
-
+require("./config/db");
 
 app.use(logger("dev"));
 app.use(express.json());
 
-
-
 app.use(bodyParser.json());
+
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -26,7 +24,7 @@ app.use((req, res, next) => {
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
     next();
 });
 
@@ -46,17 +44,11 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || "An unknown error has occured!" });
 });
 
-app.get("/*", function (req, res) {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
-mongoose
-    .connect(
-        "mongodb+srv://<project3>:<steve123>@cluster0.lj871.azure.mongodb.net/<blogs>?retryWrites=true&w=majority"
-    )
-    .then(() => {
-        app.listen(3001);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+
+
+const port = 3001;
+
+app.listen(port, () => {
+    console.log(`Running on ${port}`)
+})
