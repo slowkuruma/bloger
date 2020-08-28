@@ -55,11 +55,11 @@ const Auth = () => {
 
     const authSubmitHandler = async (event) => {
         event.preventDefault();
-        console.log("log me in");
         if (isLoginMode) {
             try {
+                console.log(formState.inputs);
                 const responseData = await sendRequest(
-                    `http:/localhost:3001/api/users/login`,
+                    `http://localhost:3001/api/users/login`,
                     "POST",
                     JSON.stringify({
                         email: formState.inputs.email.value,

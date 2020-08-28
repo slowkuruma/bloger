@@ -22,6 +22,7 @@ const UserBlogs = () => {
     }, [sendRequest, userId]);
 
     const blogDeleteHandler = (deletedBlogId) => {
+        console.log("clicking button!");
         setLoadedBlogs((prevBlogs) =>
             prevBlogs.filter((blog) => blog.id !== deletedBlogId)
         );
