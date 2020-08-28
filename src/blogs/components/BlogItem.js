@@ -21,16 +21,19 @@ const BlogItem = (props) => {
         setShowConfirmModal(false);
     };
 
-    const confirmDeleteHandler = () => {
+    const confirmDeleteHandler = async () => {
         console.log("Did I make it here?");
         setShowConfirmModal(false);
         try {
-            sendRequest(`http://localhost:3001/api/blogs/${props.id}`, "DELETE", null, {
-                Authorization: "Bearer " + auth.token,
-            });
+            await sendRequest(`http://localhost:3001/api/blogs/${props.id}`,
+                "DELETE",
+                null,
+                {
+                    Authorization: "Bearer " + auth.token,
+                });
             props.onDelete(props.id);
         } catch (err) { }
-    }
+    };
 
     return (
         <>
@@ -39,13 +42,13 @@ const BlogItem = (props) => {
                 show={showConfirmModal}
                 onCancel={cancelDeleteHandler}
                 header="Are you sure?"
-                footerClass="place-item_modal-actions"
+                footerClass="blog-item__modal-actions"
                 footer={
                     <>
-                        <Button inverse OnClick={cancelDeleteHandler}>
+                        <Button inverse onClick={cancelDeleteHandler}>
                             CANCEL
         </Button>
-                        <Button danger OnClick={confirmDeleteHandler}>
+                        <Button danger onClick={confirmDeleteHandler}>
                             DELETE
         </Button>
                     </>

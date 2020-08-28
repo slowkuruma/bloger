@@ -171,7 +171,6 @@ const deleteBlog = async (req, res, next) => {
 
     try {
         await blog.remove();
-        blog.creator.blogs.pull(blog);
         await blog.creator.save();
     } catch (err) {
         const error = new HttpError(
