@@ -117,7 +117,7 @@ const UpdateBlog = (props) => {
                     validators={[VALIDATOR_MINLENGTH]}
                     errorText="Please enter a description"
                     onInput={inputHandler}
-                    initialValue={loadedBlog.title}
+                    initialValue={loadedBlog.description}
                     initialValid={true}
                 />
                 <Button type="submit" disabled={!formState.isValid}>
