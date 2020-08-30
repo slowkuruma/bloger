@@ -8,6 +8,7 @@ const HttpError = require("./models/http-error");
 
 const app = express();
 
+require("dotenv").config();
 require("./config/db");
 
 app.use(cors());
@@ -46,8 +47,4 @@ app.use((error, req, res, next) => {
 
 
 
-const port = 3001;
-
-app.listen(port, () => {
-    console.log(`Running on ${port}`)
-})
+app.listen(process.env.PORT || 3001)

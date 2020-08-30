@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const connectionString = 'mongodb+srv://project3:steve123@cluster0.lj871.azure.mongodb.net/blogs?retryWrites=true&w=majority';
+const connectionString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lj871.azure.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 
-mongoose.connect(connectionString, {
+mongoose.connect(process.env.MONGODB_URI || connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
